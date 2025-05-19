@@ -26,7 +26,11 @@ public class ExercicioUm {
                 }else if(opcao == 1){
                     adicionar(lista);
                 }else if (opcao == 2){
-                    remover(lista);
+                    if(lista.isEmpty()){
+                        System.out.println("A lista está vazia!");
+                    }else{
+                        remover(lista);
+                    }
                 }else if (opcao == 3){
                     exibir(lista);
                 }else if (opcao == 4){
