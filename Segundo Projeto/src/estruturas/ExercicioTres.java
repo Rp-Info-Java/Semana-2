@@ -57,7 +57,7 @@ public class ExercicioTres {
             teclado.nextLine();
 
             prods.put(produto, valor);
-            
+
             System.out.println("Produto adicionado com sucesso!\n");
         }
     }
