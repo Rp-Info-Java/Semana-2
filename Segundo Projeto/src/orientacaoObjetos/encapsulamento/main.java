@@ -1,5 +1,6 @@
 package orientacaoObjetos.encapsulamento;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class main {
@@ -13,11 +14,15 @@ public class main {
         System.out.println("Informe o nome do titular da conta a ser acessada: ");
         nome = teclado.nextLine();
 
-        System.out.println("Digite o saldo da sua conta: R$ ");
-        saldo = teclado.nextDouble();
-        teclado.nextLine();
+        try{
+            System.out.println("Digite o saldo da sua conta: R$ ");
+            saldo = teclado.nextDouble();
+            teclado.nextLine();
 
-        conta.ContaBancaria(nome, saldo);
+            conta.ContaBancaria(nome, saldo);
+        }catch (InputMismatchException e){
+            throw new InputMismatchException("Ocorreu um erro pois um caractere ou uma String podem ter sido digitados. Erro: " + e);
+        }
 
         do{
             System.out.println("""
@@ -26,8 +31,13 @@ public class main {
                     2- Sacar dinheiro.
                     0- Sair da conta.
                     """);
-            System.out.println("Digite sua opção: ");
-            opcao = teclado.nextInt();
+
+            try{
+                System.out.println("Digite sua opção: ");
+                opcao = teclado.nextInt();
+            }catch (InputMismatchException e){
+                throw new InputMismatchException("Ocorreu um erro pois um caractere ou uma String podem ter sido digitados. Erro: " + e);
+            }
 
             if(opcao < 0 || opcao > 2){
                 System.out.println("Opção selecionada é inválida. Selecione uma opção válida (0-2).\n");
