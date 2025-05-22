@@ -1,7 +1,7 @@
 package orientacaoObjetos.polimorfismo;
 
 public class Gato extends Animal{
-    Gato(String nome){
+    public Gato(String nome){
         super(nome);
     }
 

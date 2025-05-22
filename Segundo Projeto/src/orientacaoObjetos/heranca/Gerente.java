@@ -2,7 +2,7 @@ package orientacaoObjetos.heranca;
 
 public class Gerente extends Funcionario{
 
-    Gerente(String nome){
+    public Gerente(String nome){
         super(nome);
     }
 
@@ -12,6 +12,6 @@ public class Gerente extends Funcionario{
     }
 
     void exibirSalario(){
-        System.out.println("Salário do desenvolvedor: R$" + this.salarioBase);
+        System.out.println("Salário do gerente: R$" + this.salarioBase);
     }
 }

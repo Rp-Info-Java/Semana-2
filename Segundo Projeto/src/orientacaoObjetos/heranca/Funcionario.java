@@ -4,7 +4,7 @@ public abstract class Funcionario {
     String nome;
     double salarioBase;
 
-    Funcionario(String nome){
+    public Funcionario(String nome){
         this.nome = nome;
         salarioBase = 5000.00;
     }

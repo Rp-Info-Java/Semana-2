@@ -2,7 +2,7 @@ package orientacaoObjetos.heranca;
 
 public class Desenvolvedor extends Funcionario{
 
-    Desenvolvedor(String nome){
+    public Desenvolvedor(String nome){
         super(nome);
     }
 
