@@ -6,7 +6,7 @@ public class main {
         Aluno aluno2 = new Aluno("Madalena", 22);
         Aluno aluno3 = new Aluno("Robson", 19);
         Turma turma = new Turma();
-        
+
         turma.adicionarAluno(aluno1);
         turma.adicionarAluno(aluno2);
         turma.adicionarAluno(aluno3);
