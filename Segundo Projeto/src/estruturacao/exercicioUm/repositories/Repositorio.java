@@ -5,4 +5,5 @@ public interface Repositorio<T> {
     public void listar();
     public void buscarPorId(Integer id);
     public void remover(Integer id);
+
 }
