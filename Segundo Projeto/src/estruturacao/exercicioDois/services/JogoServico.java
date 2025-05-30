@@ -20,6 +20,7 @@ public class JogoServico {
         String[] frase = new String[2];
         String alternativa;
         int id = 1;
+        int contador = 0;
 
         do{
             try{
@@ -52,14 +53,14 @@ public class JogoServico {
                     System.out.println("Qual é a alternativa correta para esta questão (a-d)? : ");
                     frase[1] = teclado.nextLine();
 
-                    perg = new Pergunta(frase[0], alternativas, frase[1], id);
+                    perg = new Pergunta(frase[0], alternativas, frase[1], id, true);
                     id++;
                     this.adicionarPergunta(perg);
 
                 } else if (opcao == 2){
                     this.listarPerguntas();
                 } else if(opcao == 3){
-                    this.responder();
+                    contador = this.responder(contador);
                 }else if (opcao == 0){
                     System.out.println("Até mais!\n");
                 }
@@ -87,42 +88,62 @@ public class JogoServico {
     }
 
     public List<Pergunta> getPerguntas(){
-        List<Pergunta> listaPergunta = new ArrayList<>();
+        List<Pergunta> listaPergunta;
         listaPergunta = repositorio.getPerguntas();
         return listaPergunta;
     }
 
+    public void updatePergunta(Pergunta perg, int index){
+        repositorio.updatePergunta(perg, index);
+    }
 
-    public void responder(){
+    public int responder(int contador){
         Random x = new Random();
         int perguntaRand, tamanho;
         Scanner teclado = new Scanner(System.in);
         List<Pergunta> perguntas;
         Pergunta pergSorteada;
-        int contPosicaoLista = 1;
-        int respostasCorretas = 0;
 
         perguntas = this.getPerguntas();
-        tamanho = perguntas.size();
-        perguntaRand = x.nextInt(tamanho);
 
-        pergSorteada = perguntas.get(perguntaRand);
-
-        System.out.println("\nPergunta " + contPosicaoLista + ": " + pergSorteada.getEnunciado());
-
-        char letraAlternativa = 'a';
-
-        for(String alternativa : pergSorteada.getAlternativas()){
-            System.out.println(letraAlternativa + ") " + alternativa);
-            letraAlternativa++;
-        }
-        System.out.println("Digite a alternativa correta (a/b/c/d): ");
-
-        if(teclado.nextLine().equals(pergSorteada.getRespostaCorreta())){
-            respostasCorretas += 1;
-            System.out.println("Resposta correta! Você acertou "+ respostasCorretas + " de "+ tamanho + " pergunta(s)");
+        if(perguntas.isEmpty()){
+            System.out.println("--- Não há perguntas no banco de questões para serem respondidas---");
         }else{
-            System.out.println("Resposta incorreta! Boa sorte na próxima pergunta!");
+            tamanho = perguntas.size();
+            perguntaRand = x.nextInt(tamanho);
+
+            pergSorteada = perguntas.get(perguntaRand);
+
+            if(pergSorteada.getStatus()){
+                System.out.println("\nPergunta " + pergSorteada.getId() + ": " + pergSorteada.getEnunciado());
+
+                char letraAlternativa = 'a';
+
+                for(String alternativa : pergSorteada.getAlternativas()){
+                    System.out.println(letraAlternativa + ") " + alternativa);
+                    letraAlternativa++;
+                }
+                System.out.println("Digite a alternativa correta (a/b/c/d): ");
+
+                if(teclado.nextLine().equals(pergSorteada.getRespostaCorreta()) && pergSorteada.getStatus()){
+                    contador++;
+                    System.out.println("Resposta correta! Você acertou " + contador + " de " + tamanho + " pergunta(s)");
+                    pergSorteada.setStatus(false);
+                    this.updatePergunta(pergSorteada, perguntaRand);
+                }else{
+                    System.out.println("Resposta incorreta! Boa sorte na próxima pergunta!");
+                }
+                if (contador == tamanho){
+                    System.out.println("Todas as perguntas foram respondidas!\n");
+                }
+            } else{
+                if (contador == tamanho){
+                    System.out.println("Todas as perguntas foram respondidas!\n");
+                } else{
+                    System.out.println("Pergunta já foi respondida");
+                }
+            }
         }
+        return contador;
     }
 }

@@ -8,4 +8,5 @@ public interface Repositorio <T>{
     public void adicionarPergunta(T pergunta);
     public void listarPerguntas();
     List<Pergunta> getPerguntas();
+    public void updatePergunta(T pergunta, int index);
 }

@@ -7,13 +7,15 @@ public class Pergunta {
     private String enunciado;
     private List<String> alternativas;
     private String respostaCorreta;
+    private Boolean status;
 
 
-    public Pergunta(String enunciado, List<String> alternativas, String respostaCorreta, Integer id) {
+    public Pergunta(String enunciado, List<String> alternativas, String respostaCorreta, Integer id, Boolean status) {
         this.enunciado = enunciado;
         this.alternativas = alternativas;
         this.respostaCorreta = respostaCorreta;
         this.id = id;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -46,5 +48,13 @@ public class Pergunta {
 
     public void setRespostaCorreta(String respostaCorreta) {
         this.respostaCorreta = respostaCorreta;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

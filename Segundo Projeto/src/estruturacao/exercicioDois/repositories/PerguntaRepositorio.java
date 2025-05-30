@@ -47,12 +47,15 @@ public class PerguntaRepositorio implements Repositorio{
             }
         }
     }
-
+    @Override
     public List<Pergunta> getPerguntas() {
         return perguntas;
     }
 
-    public void setPerguntas(List<Pergunta> perguntas) {
-        this.perguntas = perguntas;
+    @Override
+    public void updatePergunta(Object pergunta, int index) {
+        Pergunta pergunta1 = (Pergunta)pergunta;
+        perguntas.set(index, pergunta1);
     }
+
 }
